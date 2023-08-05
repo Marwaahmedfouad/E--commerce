@@ -79,7 +79,7 @@ export default function Navbar() {
                                 <Link className="nav-link" to="register">Register</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="logout">Logout</Link>
+                                <Link className="nav-link">Logout</Link>
                             </li>
                         </ul>
 
