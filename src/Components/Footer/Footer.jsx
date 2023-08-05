@@ -1,7 +1,9 @@
 import React from 'react'
 import styles from './Footer.module.css'
 export default function Footer() {
-  return (
-    <div>Footer</div>
+  return (<>
+  
+  <div className='fixed-bottom text-center bg-black text-light'>Footer</div>
+  </>
   )
 }
