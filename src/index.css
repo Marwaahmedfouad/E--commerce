@@ -58,3 +58,9 @@ a , a:hover{
     background-color: var(--light-color) !important;
 }
 
+/* Custom CSS to remove blue color from input focus */
+/* .form-control:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  } */
+  
