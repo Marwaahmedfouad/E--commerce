@@ -1,13 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import Products from './../Products/Products';
 import CircularProgress from '@mui/material/CircularProgress'; 
 
 
 
 export default function FeatureProduct() {
-    const [Products, setProducts] = useState([])
+    const [products, setproducts] = useState([])
 
 
     async function getProducts() {
@@ -15,7 +14,7 @@ export default function FeatureProduct() {
         // .catch((err)=>{console.log(err)})
         // .then((res)=>{console.log(res)})
         console.log(data.data);
-        setProducts(data.data)
+        setproducts(data.data)
     }
 
     useEffect(() => {
@@ -24,10 +23,10 @@ export default function FeatureProduct() {
 
     return (
         <>
-        {/* {Products.lenght >0? */}
-           <div className='container'>
+        {products.length >0?(
+           <div className='container my-5'>
             <div className='row'>
-                {Products.map((p) => <div key={p.id} className='col-md-2'>
+                {products.map((p) => <div key={p.id} className='col-md-2'>
                     <Link to={`/productsDetails/${p._id}/`}>
                         <div className='product px-2 py-3'>
                             <img className='w-100' src={p.imageCover} alt=''></img>
@@ -43,10 +42,13 @@ export default function FeatureProduct() {
                 </div>)}
 
             </div>
-            </div>
-             {/* : */}
-                {/* <div>loading.....</div> */}
-                {/* <CircularProgress /> */}
-             {/* } */}
+            </div>)
+             :(
+             <div className='text-center'>
+            {/* <i class="fas fa-spinner fa-spin"></i> */}
+                 {/* <div>loading.....</div> */}
+                <CircularProgress /> 
+             </div>
+            )}
         </>)
 }

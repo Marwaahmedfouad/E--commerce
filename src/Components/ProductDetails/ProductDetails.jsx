@@ -1,12 +1,67 @@
+// import axios from 'axios';
+// import React, { useEffect, useState } from 'react';
+// import { useParams } from 'react-router-dom';
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick-theme.css";
 
+// export default function ProductDetails() {
+//   const settings = {
+//     dots: true,
+//     infinite: true,
+//     speed: 500,
+//     slidesToShow: 1,
+//     slidesToScroll: 1
+//   };
+
+//   const { id } = useParams();
+//   const [productDetails, setProductDetails] = useState({});
+
+//   async function getProductDetails(id) {
+//     try {
+//       const { data } = await axios.get(`https://route-ecommerce.onrender.com/api/v1/products/${id}`);
+//       setProductDetails(data.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
+
+//   useEffect(() => {
+//     getProductDetails(id);
+//   }, [id]);
+
+//   return (
+//     <div className='container'>
+//       <div className='row'>
+//         <div className='col-md-4'>
+          
+//             <Slider {...settings}>
+//               {productDetails?.images.map((img) => <img src={img} alt='' />)}
+//             </Slider>
+        
+          
+//         </div>
+//         <div className='col-md-8 d-flex' style={{ alignHeight: 'center', alignItems: 'center', lineHeight: '40px' }}>
+//           <div className='d-flex flex-column align-items-star justify-center'>
+//             <h2 className='fw-bolder text-primary'>title: {productDetails.title}</h2>
+//             <div className='fw-bolder'>quantity: {productDetails.quantity}</div>
+//             <div className='fw-bolder'>price: {productDetails.price}EGP</div>
+//             <div className='fw-bolder'>Rate: <i className='fas fa-star rating-color'></i> {productDetails.ratingsAverage}</div>
+//             <button className='btn bg-main text-white'>+Add</button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+//////////////////////////////////////////////////////////
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import CircularProgress from '@mui/material/CircularProgress'; 
 
 export default function ProductDetails() {
-
-
   const settings = {
     dots: true,
     infinite: true,
@@ -15,77 +70,49 @@ export default function ProductDetails() {
     slidesToScroll: 1
   };
 
+  const { id } = useParams();
+  const [productDetails, setProductDetails] = useState({});
 
-  let allparams = useParams();
-  // let allparams = useParams();
-  let { id } = useParams();
-  const [productDetails, setproductDetails] = useState({})
-  console.log(allparams);
-  async function getproductDetails(id) {
-    let { data } = await axios.get(`https://route-ecommerce.onrender.com/api/v1/products/${id}`);
-    console.log(data.data);
-    setproductDetails(data.data)
+  async function getProductDetails(id) {
+    try {
+      const { data } = await axios.get(`https://route-ecommerce.onrender.com/api/v1/products/${id}`);
+      setProductDetails(data.data);
+    } catch (error) {
+      console.error(error);
+    }
   }
+
   useEffect(() => {
-    getproductDetails(id)
-  }, [])
+    getProductDetails(id);
+  }, [id]);
+
   return (
-    <>
     <div className='container'>
       <div className='row'>
         <div className='col-md-4'>
-          <img className='w-100 shadow my-3 gap-5 rouded' src={productDetails.imageCover} alt=''></img>
+          {productDetails.images && productDetails.images.length > 0 ? (
+            <Slider {...settings} style={{ paddingTop: '20px', paddingBottom: '20px' }}>
+            {productDetails.images.map((img) => <img key={img} src={img} alt='' />)}
+          </Slider>
+          ) : (
+            <div className='text-center'>
+            {/* <i class="fas fa-spinner fa-spin"></i> */}
+                 {/* <div>loading.....</div> */}
+                <CircularProgress /> 
+             </div>           
+              // <p>No images available</p>
+          )}
         </div>
-        <div className='col-md-8 d-flex  ' style={{alignHeight:'center',alignItems:'center',lineHeight:'40px'}}>
-          <div className='d-flex flex-column align-items-star  justify-center'>
-          <h2 className='fw-bolder text-primary'>title{productDetails.title}</h2>
-          {/* <div className='fw-bolder'>brandName :{productDetails.brand.name}</div> */}
-          {/* <div className='fw-bolder'>category :{productDetails.category.name}</div> */}
-          <div className='fw-bolder'>quantity : {productDetails.quantity}</div>
-          <div className='fw-bolder'>price : {productDetails.price}EGP</div>
-          <div className='fw-bolder'>Rate: <i className='fas fa-star rating-color'></i> {productDetails.ratingsAverage}</div>
-          <button className='btn bg-main text-white'> +Add</button>
+        <div className='col-md-8 d-flex' style={{ alignHeight: 'center', alignItems: 'center', lineHeight: '40px' }}>
+          <div className='d-flex flex-column align-items-star justify-center'>
+            <h2 className='fw-bolder text-primary'>title: {productDetails.title}</h2>
+            <div className='fw-bolder'>quantity: {productDetails.quantity}</div>
+            <div className='fw-bolder'>price: {productDetails.price}EGP</div>
+            <div className='fw-bolder'>Rate: <i className='fas fa-star rating-color'></i> {productDetails.ratingsAverage}</div>
+            <button className='btn bg-main text-white'>+Add</button>
           </div>
-          </div>
-
         </div>
       </div>
-
-      import React, { Component } from "react";
-import Slider from "react-slick";
-
-export default class SimpleSlider extends Component {
-  render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-    return (
-      <div>
-        <h2> Single Item</h2>
-        <Slider {...settings}>
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-        </Slider>
-      </div>
-    </>)
+    </div>
+  );
 }
