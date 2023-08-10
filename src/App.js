@@ -13,6 +13,8 @@ import Notfound from './Components/Notfound/Notfound'
 import jwtDecode from 'jwt-decode'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import ProductDetails from './Components/ProductDetails/ProductDetails';
+import { CartContextProvider } from './Context/Cartcontext'
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -44,6 +46,9 @@ export default function App() {
 
   return (
     <>
+    <CartContextProvider>
+      <Toaster/>
       <RouterProvider router={routers}></RouterProvider>
+      </CartContextProvider>
     </>)
 }
