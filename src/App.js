@@ -15,6 +15,7 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import ProductDetails from './Components/ProductDetails/ProductDetails';
 import { CartContextProvider } from './Context/Cartcontext'
 import { Toaster } from 'react-hot-toast';
+import Checkout from './Components/Checkout/Checkout'
 
 
 
@@ -37,6 +38,7 @@ export default function App() {
         { path: 'register', element: <Register /> },
         { path: 'productsDetails/:id', element: <ProtectedRoute><ProductDetails userData={userData} /></ProtectedRoute> },
         { path: 'about', element: <ProtectedRoute><About /></ProtectedRoute> },
+        { path: 'checkout', element: <ProtectedRoute><Checkout /></ProtectedRoute> },
         { path: 'brands', element: <ProtectedRoute><Brands /></ProtectedRoute> },
         { path: 'products', element: <ProtectedRoute><Products /></ProtectedRoute> },
         { path: '*', element: <ProtectedRoute><Notfound /></ProtectedRoute> },

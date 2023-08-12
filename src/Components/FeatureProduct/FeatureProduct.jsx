@@ -34,7 +34,7 @@ export default function FeatureProduct() {
                     <div className='row'>
                         {products.map((p) => <div key={p.id} className='col-md-2'>
                                 <div className='product  cursor-pointer px-2 py-3'>
-                            <Link to={`/productsDetails/${p._id}/`}>
+                            <Link className='text-decoration-none' to={`/productsDetails/${p._id}/`}>
                                     <img className='w-100' src={p.imageCover} alt=''></img>
                                     <div className='text-main fw-bolder font-sm'>{p.category.name}</div>
                                     <h1 className='h3 fw-bolder fs-6'>{p.title.split(' ').slice(0, 2).join(' ')}</h1>

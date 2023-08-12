@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import styles from './Carts.module.css'
 import { cartContext } from '../../Context/Cartcontext'
 import { toast } from 'react-hot-toast'
+import { Link } from 'react-router-dom'
 
 export default function Carts() {
   const [cartproducts, setcartproducts] = useState(null)
-  let { getLoggedUserCart,removeItem ,updateproduct} = useContext(cartContext)
+  let { getLoggedUserCart, removeItem, updateproduct } = useContext(cartContext)
 
   async function getcart() {
     let response = await getLoggedUserCart();
@@ -15,21 +16,21 @@ export default function Carts() {
   useEffect(() => {
     getcart()
   }, [])
-async function removeproduct(productid){
-  let response =await removeItem(productid);
-  setcartproducts(response.data.data);
-  if(response.data.status==='success'){
-    toast('product removed')
+  async function removeproduct(productid) {
+    let response = await removeItem(productid);
+    setcartproducts(response.data.data);
+    if (response.data.status === 'success') {
+      toast('product removed')
+    }
+
   }
 
-}
 
-
-async function updateproductitem(productid, count){
-  let response =await updateproduct(productid,count);
-  setcartproducts(response.data.data);
+  async function updateproductitem(productid, count) {
+    let response = await updateproduct(productid, count);
+    setcartproducts(response.data.data);
     toast('product count updated')
-}
+  }
 
   return (<>
 
@@ -44,19 +45,23 @@ async function updateproductitem(productid, count){
         <div className='col-md-11 d-flex justify-content-between'>
           <div>
             <h6>{p.product.title}</h6>
-          <h6 className='text-main'>price:{p.price}</h6>
-          <button onClick={()=>removeproduct(p.product._id)}><i className='fa-regular text-main fa-trash-can'></i> Remove</button>
+            <h6 className='text-main'>price:{p.price}</h6>
+            <button onClick={() => removeproduct(p.product._id)}><i className='fa-regular text-main fa-trash-can'></i> Remove</button>
 
-            </div>
-            <div>
-        <button onClick={()=>updateproductitem(p.product._id,p.count+1)} className='border-main btn-sm'>+</button>
-        <span className='mx-2'>{p.count}</span>
-        <button onClick={()=>updateproductitem(p.product._id,p.count-1)} className='border-main btn-sm'>-</button>
-            </div>
+          </div>
+          <div>
+            <button onClick={() => updateproductitem(p.product._id, p.count + 1)} className='border-main btn-sm'>+</button>
+            <span className='mx-2'>{p.count}</span>
+            <button onClick={() => updateproductitem(p.product._id, p.count - 1)} className='border-main btn-sm'>-</button>
+          </div>
         </div>
       </div>)}
+      <button className='btn bg-main text-white text-center'>
+        <Link className='text-white text-decoration-none' to={'/checkout'}>
+        Checkout
+        </Link>
+        </button>
     </div>
-
     </>
       :
       null}
