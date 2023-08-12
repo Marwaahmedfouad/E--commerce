@@ -6,9 +6,12 @@ import CatergoriesSlider from '../CatergoriesSlider/CatergoriesSlider'
 export default function Home() {
   return (<>
      {/* <div>Home</div> */}
+     <div className='container'>
      <CatergoriesSlider></CatergoriesSlider>
     <FeatureProduct></FeatureProduct>
     {/* <ProductDetails></ProductDetails> */}
+    </div>
+
   </>
   )
 }
